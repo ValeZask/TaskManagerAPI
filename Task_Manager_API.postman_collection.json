@@ -1,0 +1,619 @@
+{
+	"info": {
+		"_postman_id": "02f3ef33-b44d-4216-8922-1737c068fac0",
+		"name": "Task Manager API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43967756",
+		"_collection_link": "https://vale-3689429.postman.co/workspace/Vale's-Workspace~86bb31ba-d16b-4c9b-8876-46d7aeac0b16/collection/43967756-02f3ef33-b44d-4216-8922-1737c068fac0?action=share&source=collection_link&creator=43967756"
+	},
+	"item": [
+		{
+			"name": "Создание задачи (POST /tasks/)",
+			"item": [
+				{
+					"name": "Позитивные сценарии",
+					"item": [
+						{
+							"name": "Создание задачи с минимальными данными",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "chngz004",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Test Task01\",\r\n  \"due_date\": \"2025-05-30T14:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base}}tasks/",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Создание задачи с полными данными",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Test Task02\",\r\n  \"description\": \"Detailed task description\",\r\n  \"due_date\": \"2025-05-30T14:00:00\",\r\n  \"status\": \"in_progress\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base}}tasks/",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Негативные сценарии",
+					"item": [
+						{
+							"name": "Создание задачи с пустым заголовком",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"\",\r\n  \"due_date\": \"2025-05-30T14:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base}}tasks/",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Создание задачи с прошедшей датой",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Test Task03\",\r\n  \"due_date\": \"2025-05-17T14:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base}}tasks/",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Создание дублирующей задачи",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Test Task01\",\r\n  \"due_date\": \"2025-05-30T14:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base}}tasks/",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Получение задачи по ID (GET /tasks/{task_id})",
+			"item": [
+				{
+					"name": "Позитивные сценарии",
+					"item": [
+						{
+							"name": "Получение существующей задачи",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}tasks/1",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Негативные сценарии",
+					"item": [
+						{
+							"name": "Получение несуществующей задачи",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}tasks/999",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										"999"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Некорректный ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}tasks/abc",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										"abc"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Получение списка задач (GET /tasks/)",
+			"item": [
+				{
+					"name": "Позитивные сценарии",
+					"item": [
+						{
+							"name": "Получение всех задач",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}tasks/",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Фильтрация по статусу",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}tasks/?status=new",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										""
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "new"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Фильтрация по дате",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}tasks/?due_date=2025-05-30",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										""
+									],
+									"query": [
+										{
+											"key": "due_date",
+											"value": "2025-05-30"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Негативные сценарии",
+					"item": [
+						{
+							"name": "Некорректный статус",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}tasks/?status=invalid",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										""
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "invalid"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Обновление задачи (PUT /tasks/{task_id})",
+			"item": [
+				{
+					"name": "Позитивные сценарии",
+					"item": [
+						{
+							"name": "Обновление всех полей",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Updated Task01\",\r\n  \"description\": \"Updated description\",\r\n  \"due_date\": \"2025-05-31T14:00:00\",\r\n  \"status\": \"done\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base}}tasks/1",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Частичное обновление",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"status\": \"done\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base}}tasks/2",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Негативные сценарии",
+					"item": [
+						{
+							"name": "Обновление несуществующей задачи",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Updated Task\",\r\n  \"description\": \"Updated description\",\r\n  \"due_date\": \"2025-05-30T14:00:00\",\r\n  \"status\": \"done\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base}}tasks/666",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										"666"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Обновление с дублирующими данными",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Test Task02\",\r\n  \"due_date\": \"2025-05-30T14:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base}}tasks/1",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Обновление с прошедшей датой",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"due_date\": \"2025-05-08T14:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base}}tasks/1",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Получение истории задачи (GET /tasks/{task_id}/history)",
+			"item": [
+				{
+					"name": "Позитивные сценарии",
+					"item": [
+						{
+							"name": "Получение истории",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}tasks/1/history/",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										"1",
+										"history",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Негативные сценарии",
+					"item": [
+						{
+							"name": "История несуществующей задачи",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}tasks/888/history/",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										"888",
+										"history",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Удаление задачи (DELETE /tasks/{task_id})",
+			"item": [
+				{
+					"name": "Позитивные сценарии",
+					"item": [
+						{
+							"name": "Удаление существующей задачи",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base}}tasks/1",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Негативные сценарии",
+					"item": [
+						{
+							"name": "Удаление несуществующей задачи",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base}}tasks/777",
+									"host": [
+										"{{base}}tasks"
+									],
+									"path": [
+										"777"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "chngz004",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base",
+			"value": "http://localhost:8000/api/",
+			"type": "string"
+		}
+	]
+}
